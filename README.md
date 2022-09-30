@@ -1,6 +1,6 @@
 # spotimy-music
 
-> A web application for tracking todo lists.
+> A web application for viewing Spotify music and user data.
 
 ### Screenshots
 
