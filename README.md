@@ -2,7 +2,7 @@
 
 > A web application for tracking todo lists.
 
-### Demo video
+### Screenshots
 
 ## Technologies Used
 
