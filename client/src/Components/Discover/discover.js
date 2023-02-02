@@ -38,10 +38,24 @@ const Discover = () => {
         Discover
       </Heading>
       <Box>
-        <Box borderRadius="xl" px={8} overflowX="scroll">
+        <Box
+          borderRadius="xl"
+          px={8}
+          overflowX="scroll"
+          sx={{
+            "&::-webkit-scrollbar": {
+              width: "16px",
+              borderRadius: "8px",
+              backgroundColor: `rgba(0, 0, 0, 0.05)`,
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: `rgba(0, 0, 0, 0.05)`,
+            },
+          }}
+        >
           <Text mb={2}>Recommended For You</Text>
           {/* map songs with cover title and artist */}
-          <Flex overflowX="scroll" gridColumnGap={8}>
+          <Flex gridColumnGap={8}>
             {recs.map((item) => {
               return (
                 <Link
@@ -103,8 +117,22 @@ const Discover = () => {
           )}
         </Flex>
         {toggle ? (
-          <Box borderRadius={"xl"} overflowX="scroll" px={8}>
-            <Flex overflowX="scroll" gridColumnGap={8}>
+          <Box
+            borderRadius={"xl"}
+            overflowX="scroll"
+            px={8}
+            sx={{
+              "&::-webkit-scrollbar": {
+                width: "16px",
+                borderRadius: "8px",
+                backgroundColor: `rgba(0, 0, 0, 0.05)`,
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: `rgba(0, 0, 0, 0.05)`,
+              },
+            }}
+          >
+            <Flex gridColumnGap={8}>
               {featured.map((playlist) => {
                 return (
                   <Link
@@ -128,8 +156,22 @@ const Discover = () => {
             </Flex>
           </Box>
         ) : (
-          <Box borderRadius={"xl"} overflowX="scroll" px={8}>
-            <Flex overflowX="scroll" gridColumnGap={8}>
+          <Box
+            borderRadius={"xl"}
+            overflowX="scroll"
+            px={8}
+            sx={{
+              "&::-webkit-scrollbar": {
+                width: "16px",
+                borderRadius: "8px",
+                backgroundColor: `rgba(0, 0, 0, 0.05)`,
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: `rgba(0, 0, 0, 0.05)`,
+              },
+            }}
+          >
+            <Flex gridColumnGap={8}>
               {releases.map((album) => {
                 return (
                   <Link

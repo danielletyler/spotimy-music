@@ -32,11 +32,21 @@ const Library = () => {
       overflowY="scroll"
       bgGradient="linear(to-t, gray.800,
       gray.700)"
+      sx={{
+        "&::-webkit-scrollbar": {
+          width: "16px",
+          borderRadius: "8px",
+          backgroundColor: `rgba(0, 0, 0, 0.05)`,
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: `rgba(0, 0, 0, 0.05)`,
+        },
+      }}
     >
       <Heading w="max-content" m={4} ml={8} mb={8}>
         Library
       </Heading>
-      <Box overflowY="scroll">
+      <Box>
         <Flex
           as="button"
           onClick={() => nav("/liked")}

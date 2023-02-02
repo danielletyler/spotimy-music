@@ -22,9 +22,9 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <Flex color="white" bg="gray.800" flexDir="column" h="100vh">
+        <Flex color="white" bg="gray.800" flexDir="column" minH="100vh">
           <TopNav token={token} setToken={setToken} />
-          <Flex h="90%">
+          <Flex>
             <SideNav />
             {token ? (
               <Routes>

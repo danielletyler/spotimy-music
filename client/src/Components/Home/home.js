@@ -25,9 +25,23 @@ const Home = () => {
         Home
       </Heading>
       <Box>
-        <Box borderRadius="xl" px={8} overflowX="scroll">
+        <Box
+          borderRadius="xl"
+          px={8}
+          overflowX="scroll"
+          sx={{
+            "&::-webkit-scrollbar": {
+              width: "16px",
+              borderRadius: "8px",
+              backgroundColor: `rgba(0, 0, 0, 0.05)`,
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: `rgba(0, 0, 0, 0.05)`,
+            },
+          }}
+        >
           <Text mb={2}>Your Recents</Text>
-          <Flex overflowX="scroll" gridColumnGap={8}>
+          <Flex gridColumnGap={8}>
             {recents.map((item, index) => {
               return (
                 <Link

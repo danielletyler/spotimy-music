@@ -24,7 +24,7 @@ const PlaylistPage = () => {
   }, [id]);
 
   return (
-    <Box w="90%" overflowY={"scroll"}>
+    <Box w="90%">
       <Flex
         py={8}
         px={32}

@@ -19,11 +19,7 @@ const Stats = () => {
   }, [queryTime]);
 
   return (
-    <Box
-      overflowY="scroll"
-      w="90%"
-      bgGradient="linear(to-b, gray.700, gray.800)"
-    >
+    <Box w="90%" bgGradient="linear(to-b, gray.700, gray.800)">
       <Flex m={6} ml={10} mb={8} gridColumnGap={8}>
         <Heading>Trends</Heading>
         <Menu>
