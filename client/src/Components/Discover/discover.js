@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Box, Text, Heading, Flex, Image, Link } from "@chakra-ui/react";
+import { Box, Text, Heading, Flex } from "@chakra-ui/react";
 import {
   getDiscoverWeekly,
   getFeaturedPlaylists,
   getNewReleases,
 } from "../../Controllers/spotify";
-import { useNavigate } from "react-router-dom";
 import SongBox from "../Shared/song-box";
 import PlaylistBox from "../Shared/playlist-box";
 import AlbumBox from "../Shared/album-box";
 
 const Discover = () => {
-  const nav = useNavigate();
   const [featured, setFeatured] = useState([]);
   const [featMessage, setFeatMessage] = useState("");
   const [releases, setReleases] = useState([]);

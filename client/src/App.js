@@ -3,7 +3,6 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { ChakraProvider, Flex, Heading, Box } from "@chakra-ui/react";
 import theme from "./theme";
 import Home from "./Components/Home/home";
-import TopNav from "./Components/Nav/top-nav";
 import Hamburger from "./Components/Nav/hamburger";
 import Discover from "./Components/Discover/discover";
 import Library from "./Components/Library/library";

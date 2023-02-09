@@ -6,7 +6,6 @@ import {
   IconButton,
   MenuItem,
   MenuList,
-  Text,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { logout, getAccessToken } from "../../Controllers/auth";
