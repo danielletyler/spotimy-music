@@ -6,7 +6,13 @@ const SideNav = () => {
   const nav = useNavigate();
 
   return (
-    <Box p={4} w="10%" borderRightColor="gray.800" borderRightWidth="1px">
+    <Box
+      p={4}
+      w="10%"
+      borderRightColor="gray.800"
+      borderRightWidth="1px"
+      bg="gray.800"
+    >
       <Text fontWeight="bold" my={2}>
         App
       </Text>

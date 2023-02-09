@@ -6,6 +6,9 @@ import {
   getNewReleases,
 } from "../../Controllers/spotify";
 import { useNavigate } from "react-router-dom";
+import SongBox from "../Shared/song-box";
+import PlaylistBox from "../Shared/playlist-box";
+import AlbumBox from "../Shared/album-box";
 
 const Discover = () => {
   const nav = useNavigate();
@@ -28,56 +31,30 @@ const Discover = () => {
 
   //checking if all data populaated before rendering --> just looks cleaner
   return recs.length > 0 && featured.length > 0 && releases.length > 0 ? (
-    <Box
-      p={2}
-      w="90%"
-      bgGradient="linear(to-t, gray.800,
-      gray.700)"
-    >
+    <Box overflowX={"hidden"} px={[0, 0, 8]}>
       <Heading w="max-content" mx={8} mb={8} mt={4}>
         Discover
       </Heading>
-      <Box>
-        <Box
-          borderRadius="xl"
-          px={8}
-          overflowX="scroll"
-          sx={{
-            "&::-webkit-scrollbar": {
-              width: "16px",
-              borderRadius: "8px",
-              backgroundColor: `rgba(0, 0, 0, 0.05)`,
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: `rgba(0, 0, 0, 0.05)`,
-            },
-          }}
-        >
-          <Text mb={2}>Recommended For You</Text>
+      <Box mb={8}>
+        <Box px={[null, null, 8]} overflowX="hidden">
+          <Heading fontSize={17} pb={8} pl={[8, 8, 0]}>
+            Recommended For You
+          </Heading>
           {/* map songs with cover title and artist */}
-          <Flex gridColumnGap={8}>
-            {recs.map((item) => {
+          <Flex
+            gridColumnGap={8}
+            overflowX="scroll"
+            borderRadius={[null, null, "xl"]}
+          >
+            {recs.map((item, index) => {
               return (
-                <Link
+                <SongBox
+                  index={index}
                   href={item.track.external_urls.spotify}
-                  isExternal
-                  key={item.track.id}
-                >
-                  <Box>
-                    <Box boxSize="2xs">
-                      <Image
-                        src={item.track.album.images[0].url}
-                        borderRadius="xl"
-                      />
-                    </Box>
-                    <Text mt={2} noOfLines={1}>
-                      {item.track.name}
-                    </Text>
-                    <Text color="gray.400" noOfLines={1}>
-                      {item.track.artists[0].name}
-                    </Text>
-                  </Box>
-                </Link>
+                  image={item.track.album.images[0].url}
+                  name={item.track.artists[0].name}
+                  artist
+                />
               );
             })}
           </Flex>
@@ -85,7 +62,7 @@ const Discover = () => {
         <Flex align={"center"} gridColumnGap={4} mt={12}>
           <Flex
             ml={8}
-            mb={3}
+            mb={8}
             borderRadius="xl"
             borderWidth="1px"
             borderColor="gray.700"
@@ -117,81 +94,18 @@ const Discover = () => {
           )}
         </Flex>
         {toggle ? (
-          <Box
-            borderRadius={"xl"}
-            overflowX="scroll"
-            px={8}
-            sx={{
-              "&::-webkit-scrollbar": {
-                width: "16px",
-                borderRadius: "8px",
-                backgroundColor: `rgba(0, 0, 0, 0.05)`,
-              },
-              "&::-webkit-scrollbar-thumb": {
-                backgroundColor: `rgba(0, 0, 0, 0.05)`,
-              },
-            }}
-          >
+          <Box borderRadius={[null, null, "xl"]} overflowX="scroll" px={8}>
             <Flex gridColumnGap={8}>
               {featured.map((playlist) => {
-                return (
-                  <Link
-                    key={playlist.id}
-                    onClick={() =>
-                      nav("/playlist", {
-                        state: {
-                          playlist: playlist,
-                        },
-                      })
-                    }
-                  >
-                    <Box>
-                      <Box boxSize="2xs" borderRadius="xl">
-                        <Image src={playlist.images[0].url} borderRadius="xl" />
-                      </Box>
-                    </Box>
-                  </Link>
-                );
+                return <PlaylistBox playlist={playlist} />;
               })}
             </Flex>
           </Box>
         ) : (
-          <Box
-            borderRadius={"xl"}
-            overflowX="scroll"
-            px={8}
-            sx={{
-              "&::-webkit-scrollbar": {
-                width: "16px",
-                borderRadius: "8px",
-                backgroundColor: `rgba(0, 0, 0, 0.05)`,
-              },
-              "&::-webkit-scrollbar-thumb": {
-                backgroundColor: `rgba(0, 0, 0, 0.05)`,
-              },
-            }}
-          >
+          <Box overflowX="scroll" px={8}>
             <Flex gridColumnGap={8}>
               {releases.map((album) => {
-                return (
-                  <Link
-                    key={album.id}
-                    href={album.external_urls.spotify}
-                    isExternal
-                  >
-                    <Box>
-                      <Box boxSize="2xs" borderRadius="xl">
-                        <Image src={album.images[0].url} borderRadius="xl" />
-                      </Box>
-                      <Box mt={2}>
-                        <Text noOfLines={1}>{album.name}</Text>
-                        <Text color="gray.300" noOfLines={1}>
-                          {album.artists[0].name}
-                        </Text>
-                      </Box>
-                    </Box>
-                  </Link>
-                );
+                return <AlbumBox album={album} />;
               })}
             </Flex>
           </Box>

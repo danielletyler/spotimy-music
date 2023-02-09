@@ -7,6 +7,14 @@ import {
   Text,
   Divider,
   Link,
+  useMediaQuery,
+  TableContainer,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
 } from "@chakra-ui/react";
 import { getPlaylistTracks } from "../../Controllers/spotify";
 import { useLocation } from "react-router-dom";
@@ -16,6 +24,7 @@ const PlaylistPage = () => {
   const id = location.state.playlist.id;
   const title = location.state.playlist.name;
   const img = location.state.playlist.images[0].url;
+  const [isDesktop] = useMediaQuery("(min-width: 1000px)");
 
   const [tracks, setTracks] = useState([]);
 
@@ -24,81 +33,98 @@ const PlaylistPage = () => {
   }, [id]);
 
   return (
-    <Box w="90%">
+    <Box px={[4, 8, 12]} pb={8}>
       <Flex
         py={8}
-        px={32}
-        bgImage={img}
-        align="end"
         gridColumnGap={12}
-        bgGradient="linear(to-t, gray.800,
-            gray.700)"
+        align={["center", "end"]}
+        flexDir={["column", "row"]}
       >
         <Box boxSize={"2xs"}>
           <Image src={img} borderRadius="xl" />
         </Box>
-        <Box>
-          <Heading w="max-content">{title}</Heading>
-        </Box>
+        <Heading mt={4} w="max-content">
+          {title}
+        </Heading>
       </Flex>
-      <Box flex={1} m={8} px={24}>
-        <Flex px={4} justify="space-between">
-          <Flex>
-            <Text w={10}>#</Text>
-            <Box w={12} ml={12} mr={8}></Box>
-            <Box>
-              <Text>TITLE</Text>
-            </Box>
-          </Flex>
-          <Flex>
-            <Text mr={24} w={72}>
-              ALBUM
-            </Text>
-            <Text>TIME</Text>
-          </Flex>
-        </Flex>
-        <Divider my={2} />
-        {tracks.map((item, index) => {
-          const time = new Date(item.track.duration_ms);
-          const min = time.getMinutes();
-          const sec = String(time.getSeconds()).padStart(2, "0");
-          return (
-            <Link
-              style={{ textDecoration: "none" }}
-              href={item.track.external_urls.spotify}
-              isExternal
-            >
+      <Divider mb={8} />
+      {isDesktop ? (
+        <TableContainer>
+          <Table variant="simple">
+            {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
+            <Thead>
+              <Tr>
+                <Th borderColor="rgba(255, 255, 255, .2)">#</Th>
+                <Th borderColor="rgba(255, 255, 255, .2)"></Th>
+                <Th borderColor="rgba(255, 255, 255, .2)">Title</Th>
+                <Th borderColor="rgba(255, 255, 255, .2)">Album</Th>
+                <Th borderColor="rgba(255, 255, 255, .2)">Time</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {tracks.map((item, index) => {
+                const time = new Date(item.track.duration_ms);
+                const min = time.getMinutes();
+                const sec = String(time.getSeconds()).padStart(2, "0");
+                return (
+                  <Tr
+                    onClick={() =>
+                      window
+                        .open(item.track.external_urls.spotify, "_blank")
+                        .focus()
+                    }
+                  >
+                    <Td borderColor="rgba(255, 255, 255, .2)" isNumeric>
+                      {index + 1}
+                    </Td>
+                    <Td borderColor="rgba(255, 255, 255, .2)">
+                      <Box boxSize={12}>
+                        <Image src={item.track.album.images[0].url} />
+                      </Box>
+                    </Td>
+                    <Td borderColor="rgba(255, 255, 255, .2)">
+                      <Text>{item.track.name}</Text>
+                    </Td>
+                    <Td borderColor="rgba(255, 255, 255, .2)">
+                      {item.track.album.name}
+                    </Td>
+                    <Td borderColor="rgba(255, 255, 255, .2)">
+                      {" "}
+                      {min}:{sec}
+                    </Td>
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <Flex flexDir={"column"} rowGap={4}>
+          {tracks.map((item, index) => {
+            return (
               <Flex
-                key={index}
-                px={4}
-                py={2}
-                justify="space-between"
-                _hover={{ bg: "gray.700" }}
-                borderRadius="xl"
+                columnGap={4}
+                onClick={() =>
+                  window
+                    .open(item.track.external_urls.spotify, "_blank")
+                    .focus()
+                }
               >
-                <Flex align="center">
-                  <Text w={10}>{index + 1}</Text>
-                  <Box boxSize={12} ml={12} mr={8}>
-                    <Image src={item.track.album.images[0].url} />
-                  </Box>
-                  <Box>
-                    <Text>{item.track.name}</Text>
-                    <Text color="gray.400">{item.track.artists[0].name}</Text>
-                  </Box>
-                </Flex>
-                <Flex align="center">
-                  <Text mr={24} w={72}>
+                <Box boxSize={14}>
+                  <Image src={item.track.album.images[0].url} />
+                </Box>
+
+                <Box>
+                  <Text>{item.track.name}</Text>
+                  <Text fontSize={14} color="rgba(255, 255, 255, .5)">
                     {item.track.album.name}
                   </Text>
-                  <Text>
-                    {min}:{sec}
-                  </Text>
-                </Flex>
+                </Box>
               </Flex>
-            </Link>
-          );
-        })}
-      </Box>
+            );
+          })}
+        </Flex>
+      )}
     </Box>
   );
 };

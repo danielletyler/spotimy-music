@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { ChakraProvider, Flex, Heading, Icon } from "@chakra-ui/react";
-import { FaRegSmileBeam } from "react-icons/fa";
+import { ChakraProvider, Flex, Heading, Box } from "@chakra-ui/react";
 import theme from "./theme";
 import Home from "./Components/Home/home";
 import TopNav from "./Components/Nav/top-nav";
-import SideNav from "./Components/Nav/side-nav";
+import Hamburger from "./Components/Nav/hamburger";
 import Discover from "./Components/Discover/discover";
 import Library from "./Components/Library/library";
 import Stats from "./Components/Trends/trends";
@@ -22,10 +21,16 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <Flex color="white" bg="gray.800" flexDir="column" minH="100vh">
-          <TopNav token={token} setToken={setToken} />
-          <Flex>
-            <SideNav />
+        <Box
+          color="white"
+          bgGradient="linear(to-t, gray.800, gray.700)"
+          // flexDirection="column"
+          minH="100vh"
+        >
+          <Box>
+            <Hamburger token={token} setToken={setToken} />
+          </Box>
+          <Box>
             {token ? (
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -37,19 +42,18 @@ function App() {
               </Routes>
             ) : (
               <Flex
-                p={2}
-                w="90%"
-                justify="center"
+                h="100vh"
+                w="100%"
                 align="center"
-                bgGradient="linear(to-t, gray.800, gray.700)"
-                gridColumnGap={4}
+                justify={"center"}
+                bgGradient="linear(to-t, gray.800,
+                gray.700)"
               >
                 <Heading>Please Login</Heading>
-                <Icon align="center" fontSize="4xl" as={FaRegSmileBeam} />
               </Flex>
             )}
-          </Flex>
-        </Flex>
+          </Box>
+        </Box>
       </BrowserRouter>
     </ChakraProvider>
   );

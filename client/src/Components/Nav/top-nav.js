@@ -10,7 +10,7 @@ const TopNav = ({ token, setToken }) => {
   }, []);
 
   return (
-    <Box borderBottomColor="gray.700" borderBottomWidth="1px">
+    <Box borderBottomColor="gray.700" borderBottomWidth="1px" bg="gray.800">
       <Flex p={4} justify="space-between">
         <Heading
           bgGradient="linear(to-l, #ff9cfe,

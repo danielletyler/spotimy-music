@@ -26,57 +26,31 @@ const Library = () => {
   }, []);
 
   return playlists.length > 0 ? (
-    <Box
-      p={2}
-      w="90%"
-      overflowY="scroll"
-      bgGradient="linear(to-t, gray.800,
-      gray.700)"
-      sx={{
-        "&::-webkit-scrollbar": {
-          width: "16px",
-          borderRadius: "8px",
-          backgroundColor: `rgba(0, 0, 0, 0.05)`,
-        },
-        "&::-webkit-scrollbar-thumb": {
-          backgroundColor: `rgba(0, 0, 0, 0.05)`,
-        },
-      }}
-    >
-      <Heading w="max-content" m={4} ml={8} mb={8}>
+    <Box py={2} px={8}>
+      <Heading w="max-content" mt={4} mb={8}>
         Library
       </Heading>
       <Box>
-        <Flex
-          as="button"
-          onClick={() => nav("/liked")}
-          flex={1}
-          bgGradient="linear(to-r, #ff9cfe,
+        <Flex flex={1} borderRadius="xl" py={4} flexDir="column" justify="left">
+          <SimpleGrid columns={[2, 2, 3, 3, 4, 5]} spacing={8}>
+            <Flex onClick={() => nav("/liked")} flexDir="column">
+              <Flex
+                borderRadius={"xl"}
+                bgGradient="linear(to-r, #ff9cfe,
               #dd93ff,
               #b58cff)"
-          borderRadius={"xl"}
-          boxSize="2xs"
-          px={4}
-          mx={8}
-          my={4}
-          justify="center"
-          align="center"
-        >
-          <Icon fontSize="5xl" as={FaHeart} />
-        </Flex>
+                as="button"
+                flex={1}
+                justify="center"
+                align="center"
+              >
+                <Icon fontSize="5xl" as={FaHeart} />
+              </Flex>
+              <Text mt={1} ml={2}>
+                Liked Songs
+              </Text>
+            </Flex>
 
-        <Center>
-          <Divider my={8} />
-        </Center>
-        <Flex
-          flex={1}
-          mx={8}
-          borderRadius="xl"
-          py={4}
-          flexDir="column"
-          justify="left"
-        >
-          <SimpleGrid columns={4} gridGap={8}>
             {playlists.map((item) => {
               return (
                 <Link
@@ -86,7 +60,7 @@ const Library = () => {
                     })
                   }
                 >
-                  <Box boxSize="2xs">
+                  <Box boxSize={[null, null, null]}>
                     <Image src={item.images[0].url} borderRadius="xl" />
                   </Box>
                   <Text mt={1} ml={2}>
@@ -102,7 +76,6 @@ const Library = () => {
   ) : (
     <Box
       p={2}
-      w="90%"
       overflowY="scroll"
       bgGradient="linear(to-t, gray.800,
       gray.700)"
