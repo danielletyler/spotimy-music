@@ -7,16 +7,16 @@ const SongBox = ({ index, href, image, name, artist }) => {
       href={href}
       isExternal
       key={index}
-      ml={[index === 0 && 8, index === 0 && 8, 0]}
+      ml={[index === 0 && 2, index === 0 && 2, index === 0 && 2, 0]}
     >
       <Box>
-        <Box boxSize={["150px", "200px", "2xs"]}>
-          <Image src={image} borderRadius="xl" />
+        <Box boxSize={["150px", "200px"]}>
+          <Image src={image} borderRadius="xl" shadow={"xl"} />
         </Box>
         <Text mt={2} noOfLines={1}>
           {name}
         </Text>
-        <Text color="gray.400" noOfLines={1}>
+        <Text color="rgba(0,0,0,.5)" noOfLines={1}>
           {artist}
         </Text>
       </Box>

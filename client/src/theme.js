@@ -1,31 +1,10 @@
+// 1. Import `extendTheme`
 import { extendTheme } from "@chakra-ui/react";
 
+// 2. Call `extendTheme` and pass your custom values
 const theme = extendTheme({
-  fonts: {
-    heading: `'Montserrat', sans-serif`,
-    body: `'Hind', sans-serif`,
-  },
-  components: {
-    Button: {
-      // 1. We can update the base styles
-      baseStyle: {
-        color: "black", // Normally, it is "semibold"
-      },
-      variants: {
-        outline: {
-          border: "1px solid white",
-          color: "white",
-          _hover: { bg: "gray.700" },
-        },
-      },
-    },
-    Link: {
-      variants: {
-        shadow: {
-          _hover: {},
-        },
-      },
-    },
+  colors: {
+    zpink: "#FF006E",
   },
 });
 

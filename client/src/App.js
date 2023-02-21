@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { ChakraProvider, Flex, Heading, Box } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  useMediaQuery,
+  Flex,
+  Heading,
+  Box,
+} from "@chakra-ui/react";
 import theme from "./theme";
 import Home from "./Components/Home/home";
-import Hamburger from "./Components/Nav/hamburger";
 import Discover from "./Components/Discover/discover";
 import Library from "./Components/Library/library";
 import Stats from "./Components/Trends/trends";
@@ -13,23 +18,18 @@ import LikedPage from "./Components/Library/liked_page";
 //fonts
 import "@fontsource/hind/400.css";
 import "@fontsource/montserrat/800.css";
+import TopNav from "./Components/Nav/top-nav";
 
 function App() {
   const [token, setToken] = useState(null);
+  const [isMobile] = useMediaQuery("(max-width: 600px)");
 
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <Box
-          color="white"
-          bgGradient="linear(to-t, gray.800, gray.700)"
-          // flexDirection="column"
-          minH="100vh"
-        >
+        <Box color="#000000" bg="#f0f0f0" minH="100vh">
           <Box>
-            <Hamburger token={token} setToken={setToken} />
-          </Box>
-          <Box>
+            <TopNav token={token} setToken={setToken} isMobile={isMobile} />
             {token ? (
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -40,14 +40,7 @@ function App() {
                 <Route path="/liked" element={<LikedPage />} />
               </Routes>
             ) : (
-              <Flex
-                h="100vh"
-                w="100%"
-                align="center"
-                justify={"center"}
-                bgGradient="linear(to-t, gray.800,
-                gray.700)"
-              >
+              <Flex align="center" justify={"center"}>
                 <Heading>Please Login</Heading>
               </Flex>
             )}

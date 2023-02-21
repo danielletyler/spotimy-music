@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Link, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-const PlaylistBox = ({ playlist }) => {
+const PlaylistBox = ({ playlist, index }) => {
   const nav = useNavigate();
   return (
     <Link
@@ -15,9 +15,9 @@ const PlaylistBox = ({ playlist }) => {
         })
       }
     >
-      <Box>
-        <Box boxSize={["150px", "200px", "2xs"]} borderRadius="xl">
-          <Image src={playlist.images[0].url} borderRadius="xl" />
+      <Box ml={[index === 0 && 2, index === 0 && 2, index === 0 && 2, 0]}>
+        <Box boxSize={["150px", "200px"]} borderRadius="xl">
+          <Image src={playlist.images[0].url} borderRadius="xl" shadow={"xl"} />
         </Box>
       </Box>
     </Link>
